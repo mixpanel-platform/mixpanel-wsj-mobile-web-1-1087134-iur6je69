@@ -4,12 +4,292 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+    <script src="//d3js.org/d3.v4.0.0-alpha.15.min.js"></script>
+    <script src="main.js"></script>
   </head>
-  <body class="mixpanel-platform-body">
-    <h1>Hello, World!</h1>
-    <script>
-      // Run queries and display results here
-    </script>
+  <body>
+    <div class="header">
+      <img class="logo" src="http://josephkanon.com/wp-content/uploads/2015/03/wsj.png">
+      <h1>Content Dashboard</h1>
+      <div class="label header-label">Powered By</div>
+      <img class="logo mixpanel" src="https://worldvectorlogo.com/logos/mixpanel.svg">
+    </div>
+    <div class="inputs">
+        <div class="filters">
+            <div class="input">
+                <div class="label dropdown-label">Filter by Platform:</div>
+                <div id="platform-dropdown" class="dropdown left-dropdown"></div>
+            </div>
+            <div class="input">
+                <div class="label dropdown-label">Filter by Edition:</div>
+                <div id="edition-dropdown" class="dropdown right-dropdown"></div>
+            </div>
+        </div>
+        <div class="sort">
+            <div class="input">
+                <div class="label dropdown-label">Sort:</div>
+                <div id="sort-dropdown" class="dropdown left-dropdown"></div>
+            </div>
+            <div class="input">
+                <div class="label dropdown-label">Sort by:</div>
+                <div id="sort-by-dropdown" class="dropdown right-dropdown"></div>
+            </div>
+        </div>
+    </div>
+    <div class="loading"></div>
+    <div id="all-slots">
+      <!-- Slot Begin -->
+      <div id="slot1" class="slot">
+        <div class="slot-num">1</div>
+        <div class="card">
+          <div class="current-slot">
+            <h2>Slot Performance</h2>
+            <div class="engagement-stats">
+              <div class="views metric">
+                <div class="label">Views</div>
+                <div class="engage-metric">980.7K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Video Plays</div>
+                <div class="engage-metric">617.8K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Shares</div>
+                <div class="engage-metric">2.9K</div>
+              </div>
+            </div>
+            <div id="slot-graph-1" class="slot-graph-img"></div> <!-- TODO:-->
+            <h2>Slot History</h2>
+            <div class="toggle-prev-stories">Show</div>
+            <!-- Prev Stories Begin -->
+            <div class="prev-stories"><div class="prev-story header-row"><div class="prev-cell prev-story-num"></div><div class="prev-cell prev-story-headline">Story</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">Publish Time</div><div class="prev-story-stat"><div class="prev-stat">Time Since Publish</div></div><div class="prev-story-stat">Engagement</div></div></div><div class="prev-story"><div class="prev-cell prev-story-num">1</div><div class="prev-cell prev-story-headline">Egyptian sunken cities are unveiled at archaeology exhibition</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">12:31</div><div class="prev-story-stat"><div class="prev-stat">5<span class="prev-time-label">H</span>59<span class="prev-time-label">M</span></div></div><div class="prev-story-stat">254.6K</div></div></div><div class="prev-story"><div class="prev-cell prev-story-num">2</div><div class="prev-cell prev-story-headline">New elements on the periodic table are named</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">12:31</div><div class="prev-story-stat"><div class="prev-stat">5<span class="prev-time-label">H</span>1<span class="prev-time-label">M</span></div></div><div class="prev-story-stat">3.1K</div></div></div><div class="prev-story"><div class="prev-cell prev-story-num">3</div><div class="prev-cell prev-story-headline">The futuristic e-bikes with traffic-stopping looks</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">12:31</div><div class="prev-story-stat"><div class="prev-stat">1<span class="prev-time-label">H</span>50<span class="prev-time-label">M</span></div></div><div class="prev-story-stat">739</div></div></div><div class="prev-story"><div class="prev-cell prev-story-num">4</div><div class="prev-cell prev-story-headline">'The Oscars of Innovation'</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">12:31</div><div class="prev-story-stat"><div class="prev-stat">5<span class="prev-time-label">H</span>59<span class="prev-time-label">M</span></div></div><div class="prev-story-stat">31.3K</div></div></div><div class="prev-story"><div class="prev-cell prev-story-num">5</div><div class="prev-cell prev-story-headline">Should human organs be grown in pigs?</div><div class="prev-cell prev-story-stats"><div class="prev-story-stat">12:31</div><div class="prev-story-stat"><div class="prev-stat">1<span class="prev-time-label">H</span>35<span class="prev-time-label">M</span></div></div><div class="prev-story-stat">28</div></div></div></div>
+            <!-- Prev Stories End -->
+          </div>
+          <div class="current-story">
+            <div class="label current-label">Current Story</div>
+            <div class="story-headline">AT&T, Time Warner Shares Drop Amid Investor Skepticism</div>
+            <div class="story-stats">
+              <div class="story-stat">
+                <div class="stat">15:49</div>
+                <div class="label">Publish Time</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">1<span class="time-label">H</span>32<span class="time-label">M</span></div>
+                <div class="label">Since Publish</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">563.9K</div>
+                <div class="label">Engagement</div>
+              </div>
+            </div>
+            <h2>Current Story Detail</h2>
+            <div class="toggle-story">Show</div>
+            <div class="story-detail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slot End -->
+      <!-- Slot Begin -->
+      <div id="slot2" class="slot">
+        <div class="slot-num">2</div>
+        <div class="card">
+          <div class="current-slot">
+            <h2>Slot Performance</h2>
+            <div class="engagement-stats">
+              <div class="views metric">
+                <div class="label">Views</div>
+                <div class="engage-metric">104.4K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Video Plays</div>
+                <div class="engage-metric">22.1K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Shares</div>
+                <div class="engage-metric">413</div>
+              </div>
+            </div>
+            <div id="slot-graph-2" class="slot-graph-img"></div> <!-- TODO:-->
+            <h2>Slot History</h2>
+            <div class="toggle-prev-stories">Show</div>
+          </div>
+          <div class="current-story">
+            <div class="label current-label">Current Story</div>
+            <div class="story-headline">Who Will Swing the Swing States?</div>
+            <div class="story-stats">
+              <div class="story-stat">
+                <div class="stat">13:22</div>
+                <div class="label">Publish Time</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">3<span class="time-label">H</span>59<span class="time-label">M</span></div>
+                <div class="label">Since Publish</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">42.9K</div>
+                <div class="label">Engagement</div>
+              </div>
+            </div>
+            <h2>Current Story Detail</h2>
+            <div class="toggle-story">Show</div>
+            <div class="story-detail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slot End -->
+      <!-- Slot Begin -->
+      <div id="slot3" class="slot">
+        <div class="slot-num">3</div>
+        <div class="card">
+          <div class="current-slot">
+            <h2>Slot Performance</h2>
+            <div class="engagement-stats">
+              <div class="views metric">
+                <div class="label">Views</div>
+                <div class="engage-metric">75.6K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Video Plays</div>
+                <div class="engage-metric">17.5K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Shares</div>
+                <div class="engage-metric">344</div>
+              </div>
+            </div>
+            <div id="slot-graph-3" class="slot-graph-img"></div> <!-- TODO:-->
+            <h2>Slot History</h2>
+            <div class="toggle-prev-stories">Show</div>
+          </div>
+          <div class="current-story">
+            <div class="label current-label">Current Story</div>
+            <div class="story-headline">Meet the New Corporate Power Brokers: Passive Investors</div>
+            <div class="story-stats">
+              <div class="story-stat">
+                <div class="stat">15:50</div>
+                <div class="label">Publish Time</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">1<span class="time-label">H</span>31<span class="time-label">M</span></div>
+                <div class="label">Since Publish</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">5.5K</div>
+                <div class="label">Engagement</div>
+              </div>
+            </div>
+            <h2>Current Story Detail</h2>
+            <div class="toggle-story">Show</div>
+            <div class="story-detail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slot End -->
+      <!-- Slot Begin -->
+      <div id="slot4" class="slot">
+        <div class="slot-num">4</div>
+        <div class="card">
+          <div class="current-slot">
+            <h2>Slot Performance</h2>
+            <div class="engagement-stats">
+              <div class="views metric">
+                <div class="label">Views</div>
+                <div class="engage-metric">101.1K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Video Plays</div>
+                <div class="engage-metric">29.6K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Shares</div>
+                <div class="engage-metric">398</div>
+              </div>
+            </div>
+            <div id="slot-graph-4" class="slot-graph-img"></div> <!-- TODO:-->
+            <h2>Slot History</h2>
+            <div class="toggle-prev-stories">Show</div>
+          </div>
+          <div class="current-story">
+            <div class="label current-label">Current Story</div>
+            <div class="story-headline">The Real Problem of This Election: Lack of a Mandate</div>
+            <div class="story-stats">
+              <div class="story-stat">
+                <div class="stat">13:23</div>
+                <div class="label">Publish Time</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">3<span class="time-label">H</span>59<span class="time-label">M</span></div>
+                <div class="label">Since Publish</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">8.7K</div>
+                <div class="label">Engagement</div>
+              </div>
+            </div>
+            <h2>Current Story Detail</h2>
+            <div class="toggle-story">Show</div>
+            <div class="story-detail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slot End -->
+      <!-- Slot Begin -->
+      <div id="slot5" class="slot">
+        <div class="slot-num">5</div>
+        <div class="card">
+          <div class="current-slot">
+            <h2>Slot Performance</h2>
+            <div class="engagement-stats">
+              <div class="views metric">
+                <div class="label">Views</div>
+                <div class="engage-metric">67.7K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Video Plays</div>
+                <div class="engage-metric">23.7K</div>
+              </div>
+              <div class="starts metric">
+                <div class="label">Shares</div>
+                <div class="engage-metric">320</div>
+              </div>
+            </div>
+            <div id="slot-graph-5" class="slot-graph-img"></div> <!-- TODO:-->
+            <h2>Slot History</h2>
+            <div class="toggle-prev-stories">Show</div>
+          </div>
+          <div class="current-story">
+            <div class="label current-label">Current Story</div>
+            <div class="story-headline">Highland Capital Investors Allege Wrongdoing in Closed Hedge Funds</div>
+            <div class="story-stats">
+              <div class="story-stat">
+                <div class="stat">13:22</div>
+                <div class="label">Publish Time</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">3<span class="time-label">H</span>59<span class="time-label">M</span></div>
+                <div class="label">Since Publish</div>
+              </div>
+              <div class="story-stat">
+                <div class="stat">1.3M</div>
+                <div class="label">Engagement</div>
+              </div>
+            </div>
+            <h2>Current Story Detail</h2>
+            <div class="toggle-story">Show</div>
+            <div class="story-detail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slot End -->
+    </div>
   </body>
 </html>
